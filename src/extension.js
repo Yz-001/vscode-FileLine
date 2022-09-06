@@ -5,7 +5,7 @@ const vscode = require('vscode');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
-const NEED_COMPUTE_TAG=['template','script','style']
+const NEED_COMPUTE_TAG=['script','style']
 
 /**
  * @param {vscode.ExtensionContext} context
