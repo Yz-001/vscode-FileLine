@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-
+// import { getConfiguration } from "./configuration.js";
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -56,12 +56,19 @@ function activate(context) {
 		 */
 		async function getBarMessage(document,lineCount){
 			// const fileName = document.fileName;
-			const lineTotal = lineCount ? `Count: ${lineCount}` : '';
+			//alimit a为开头 因为配置是按字母排序的 
+			let islimit = getConfiguration('alimit')
+
+			// 总数直接取返回文档参数 额外写 
+			let countLimit = getConfiguration('count') && islimit ? `/ ${getConfiguration('count')}`: '';
+			const lineTotal = lineCount ? `Count: ${lineCount} ${countLimit}` : '';
 			computeMap.set('Count',lineTotal)
 			
 			for (const tag of NEED_COMPUTE_TAG) {
+				// 启用界限配置才会展示指定界限数
+				const tagLimit = getConfiguration(tag) && islimit ? `/ ${getConfiguration(tag)}` : '';
 				const tagTotal = await getTextRegexTagCount(document,tag)
-				const message = tagTotal ? ` ${tag.replace(tag[0],tag[0].toUpperCase())}:${getTextRegexTagCount(document,tag)} ` :'';
+				const message = tagTotal ? ` ${tag.replace(tag[0],tag[0].toUpperCase())}:${getTextRegexTagCount(document,tag)} ${tagLimit}` :'';
 				computeMap.set(tag,message)
 			}
 			return [...computeMap.values()].join(" ")
@@ -102,16 +109,10 @@ function activate(context) {
 			updateStatusBar(document);
 		});
 
-		//重置文档内容
-		// function resetActiveText(content) {
-		// 	if (content) {
-		// 		activeTextEditor.edit(editBuilder => {
-		// 			// 从开始到结束，全量替换
-		// 			const end = new vscode.Position(document.lineCount + 1, 0);
-		// 			editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), content);
-		// 		})
-		// 	}
-		// }
+		// 获取用户在设置配置数 如果没有设置，返回undefined
+		function getConfiguration(configName){
+			return vscode.workspace.getConfiguration().get(`vscodePluginFileLine.${configName}`);
+		}
 	});
 
 	context.subscriptions.push(disposable);

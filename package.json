@@ -3,7 +3,17 @@
   "displayName": "fileLine",
   "description": "A plugin that records the number of lines in the language of a file",
   "publisher": "Yz",
-  "keywords": ["vscode","plugin","fileLine"],
+  "private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Yz-001/vscode-FileLine"
+	},
+  "keywords": [
+    "vscode",
+    "plugin",
+    "fileLine"
+  ],
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.17.0"
@@ -17,6 +27,32 @@
   ],
   "main": "./src/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "fileline",
+      "properties": {
+        "vscodePluginFileLine.alimit": {
+          "type": "boolean",
+          "default": false,
+          "description": "固定界限展示"
+        },
+        "vscodePluginFileLine.count": {
+          "type": "string",
+          "default": "",
+          "description": "总行界限数"
+        },
+        "vscodePluginFileLine.script": {
+          "type": "string",
+          "default": "",
+          "description": "script界限行数"
+        },
+        "vscodePluginFileLine.style": {
+          "type": "string",
+          "default": "",
+          "description": "style界限行数"
+        }
+      }
+    },
     "commands": [
       {
         "command": "fileline.examine",
