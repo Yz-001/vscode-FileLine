@@ -103,7 +103,7 @@ function activate(context) {
 		vscode.workspace.onDidChangeTextDocument((activeTextEditor)=>{
 			updateStatusBar(activeTextEditor.document);
 		})
-
+		
 		// 打开文档内容触发
 		vscode.workspace.onDidOpenTextDocument((document) => {
 			updateStatusBar(document);

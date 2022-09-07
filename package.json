@@ -9,12 +9,13 @@
 		"type": "git",
 		"url": "https://github.com/Yz-001/vscode-FileLine"
 	},
+  "icon": "resources/icon.png",
   "keywords": [
     "vscode",
     "plugin",
     "fileLine"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.17.0"
   },
