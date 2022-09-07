@@ -38,8 +38,13 @@ function activate(context) {
 				joinStr+=`"${index}${contentList[index]}"+`
 			}
 			const textMatch=joinStr.match(new RegExp(`\<${tag}((.|\n)*?)\<\/${tag}\>`,'ig'))
+			// 存在多个相同标签的情况 总数需要叠加
 			if(textMatch){
-				return textMatch[0].split('\n').length
+				let sum=0
+				for (const index in textMatch) {
+					sum+=textMatch[index].split('\n').length
+				}
+				return sum
 			}
 		}
 
