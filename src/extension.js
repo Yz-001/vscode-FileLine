@@ -82,8 +82,10 @@ function activate(context) {
 		}
 
 
-		//初始化状态栏
-		updateStatusBar(vscode.window.activeTextEditor.document)
+		//初始化状态栏 没有文件情况下不展示
+		if (vscode.window.activeTextEditor) {
+			updateStatusBar(vscode.window.activeTextEditor.document)
+		}
 
 		// 修改文档内容触发
 		vscode.workspace.onDidChangeTextDocument((activeTextEditor)=>{
