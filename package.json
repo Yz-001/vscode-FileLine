@@ -4,7 +4,6 @@
   "description": "A plugin that records the number of lines in the language of a file",
   "publisher": "Yz",
   "private": true,
-	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Yz-001/vscode-FileLine"
@@ -24,6 +23,7 @@
   ],
   "activationEvents": [
     "onCommand:fileline.examine",
+    "onCommand:fileline.range",
     "onLanguage:vue"
   ],
   "main": "./src/extension.js",
