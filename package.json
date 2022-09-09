@@ -2,23 +2,64 @@
   "name": "fileline",
   "displayName": "fileLine",
   "description": "A plugin that records the number of lines in the language of a file",
-  "version": "0.0.1",
+  "publisher": "Yz",
+  "private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Yz-001/vscode-FileLine"
+	},
+  "icon": "resources/icon.png",
+  "keywords": [
+    "vscode",
+    "plugin",
+    "fileLine"
+  ],
+  "version": "0.0.2",
   "engines": {
-    "vscode": "^1.34.0"
+    "vscode": "^1.17.0"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
     "onCommand:fileline.examine",
+    "onCommand:fileline.range",
     "onLanguage:vue"
   ],
   "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "fileline.examine",
-      "title": "fileline"
-    }]
+    "configuration": {
+      "type": "object",
+      "title": "fileline",
+      "properties": {
+        "vscodePluginFileLine.alimit": {
+          "type": "boolean",
+          "default": false,
+          "description": "固定界限展示"
+        },
+        "vscodePluginFileLine.count": {
+          "type": "string",
+          "default": "",
+          "description": "总行界限数"
+        },
+        "vscodePluginFileLine.script": {
+          "type": "string",
+          "default": "",
+          "description": "script界限行数"
+        },
+        "vscodePluginFileLine.style": {
+          "type": "string",
+          "default": "",
+          "description": "style界限行数"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "fileline.examine",
+        "title": "fileline"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
@@ -26,14 +67,14 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.71.0",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.17.0",
+    "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.20.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
-    "typescript": "^4.7.4",
-    "@vscode/test-electron": "^2.1.5"
+    "typescript": "^4.7.4"
   }
 }
